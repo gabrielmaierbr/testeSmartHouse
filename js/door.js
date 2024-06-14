@@ -8,14 +8,14 @@ document.getElementById("openDoorSwitch")
     status.style.color = "green";
     status.style.display = "block";
     $.ajax({
-        url: "http://192.168.26.168/H",
+        url: "http://192.168.26.168/TA",
     });
     } else {
     status.innerText = "A porta está trancada";
     status.style.color = "red";
     status.style.display = "block";
     $.ajax({
-        url: "http://192.168.26.168/L",
+        url: "http://192.168.26.168/TF",
     });
     }
     setTimeout(function() {

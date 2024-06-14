@@ -7,14 +7,14 @@ document.getElementById("alarmSwitch")
     status.style.color = "green";
     status.style.display = "block";
     $.ajax({
-        url: "http://192.168.26.168/MUDAR",
+        url: "http://192.168.26.168/LA",
     });
     } else {
     status.innerText = "O alarme está desligado";
     status.style.color = "red";
     status.style.display = "block";
     $.ajax({
-        url: "http://192.168.26.168/MUDAR",
+        url: "http://192.168.26.168/DA",
     });
     }
     setTimeout(function() {

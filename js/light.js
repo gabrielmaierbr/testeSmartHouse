@@ -7,14 +7,14 @@ document.getElementById("turnOnLightSwitchSala")
       status.style.color = "green";
       status.style.display = "block";
       $.ajax({
-        url: "http://192.168.26.168/MUDAR",
+        url: "http://192.168.26.168/LS",
       });
     } else {
       status.innerText = "A luz da sala está apagada";
       status.style.color = "red";
       status.style.display = "block";
       $.ajax({
-        url: "http://192.168.26.168/MUDAR",
+        url: "http://192.168.26.168/DS",
       });
     }
     setTimeout(function() {
@@ -29,14 +29,14 @@ document.getElementById("turnOnLightSwitchCozinha")
       status.style.color = "green";
       status.style.display = "block";
       $.ajax({
-        url: "http://192.168.26.168/MUDAR",
+        url: "http://192.168.26.168/LV",
       });
     } else {
       status.innerText = "A luz da cozinha está apagada";
       status.style.color = "red";
       status.style.display = "block";
       $.ajax({
-        url: "http://192.168.26.168/MUDAR",
+        url: "http://192.168.26.168/DV",
       });
     }
     setTimeout(function() {
@@ -51,14 +51,14 @@ document.getElementById("turnOnLightSwitchQuarto")
       status.style.color = "green";
       status.style.display = "block";
       $.ajax({
-        url: "http://192.168.26.168/MUDAR",
+        url: "http://192.168.26.168/LQ"
       });
     } else {
       status.innerText = "A luz do quarto está apagada";
       status.style.color = "red";
       status.style.display = "block";
       $.ajax({
-        url: "http://192.168.26.168/MUDAR",
+        url: "http://192.168.26.168/DQ",
       });
     }
     setTimeout(function() {

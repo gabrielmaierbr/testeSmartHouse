@@ -7,7 +7,7 @@ document.getElementById("turnOnAirConditioningSwitch")
     status.style.color = "green";
     status.style.display = "block";
     $.ajax({
-        url: "http://192.168.26.168/MUDAR",
+        url: "http://192.168.26.168/VL",
     });
     
     } else {
@@ -15,7 +15,7 @@ document.getElementById("turnOnAirConditioningSwitch")
     status.style.color = "red";
     status.style.display = "block";
     $.ajax({
-        url: "http://192.168.26.168/MUDAR",
+        url: "http://192.168.26.168/VD",
     });
     }
 });

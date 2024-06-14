@@ -4,6 +4,9 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+ @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -26,6 +29,11 @@
   --danger: #dc3545;
   --light: #f8f9fa;
   --dark: #343a40;
+  --backgroundIndex: #adacc2;
+  --sidebarColor: #070F2B;
+  --buttonColor: #535C91;
+  --checkboxColor: #1B1A55;
+  --buttonHover: #282752;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -38,7 +46,8 @@
 *::before,
 *::after {
   -webkit-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  user-select: none; }
 
 html {
   font-family: sans-serif;
@@ -57,7 +66,8 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff; }
+  background-color: #fff;
+}
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
@@ -2171,11 +2181,11 @@ fieldset:disabled a.btn {
       box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5); }
 
 .btn-warning {
-  color: #212529;
-  background-color: #ffc107;
-  border-color: #ffc107; }
+  color: white;
+  background-color: #7a7c92;
+  border-color: #7a7c92; }
   .btn-warning:hover {
-    color: #212529;
+    color: white;
     background-color: #e0a800;
     border-color: #d39e00; }
   .btn-warning:focus, .btn-warning.focus {
@@ -4781,7 +4791,7 @@ a.close.disabled {
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #fff;
+  background-color: #d0cade;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
@@ -4791,7 +4801,7 @@ a.close.disabled {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1040;
+  z-index: -1;
   width: 100vw;
   height: 100vh;
   background-color: #000; }
@@ -8207,14 +8217,16 @@ h1, h2, h3, h4, h5,
   width: 100%; }
 
 #sidebar {
+  height: 100vh;
   min-width: 250px;
   max-width: 250px;
-  background: #3eb531;
+  background: var(--sidebarColor);
   color: #fff;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
-  position: relative; }
+  position: fixed;
+  z-index: 7; }
   #sidebar .h6 {
     color: #fff; }
   #sidebar.active {
@@ -8271,11 +8283,11 @@ h1, h2, h3, h4, h5,
       height: 40px;
       border-radius: 50%; }
       #sidebar .custom-menu .btn.btn-primary {
-        background: #268a1c;
-        border-color: #268a1c; }
+        background: var(--buttonColor);
+        border-color: var(--buttonColor); }
         #sidebar .custom-menu .btn.btn-primary:hover, #sidebar .custom-menu .btn.btn-primary:focus {
-          background: #166110 !important;
-          border-color: #166110 !important; }
+          background: var(--buttonHover) !important;
+          border-color: var(--buttonHover) !important; }
 
 a[data-toggle="collapse"] {
   position: relative; }
@@ -8299,14 +8311,16 @@ a[data-toggle="collapse"] {
   min-height: 100vh;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
-  transition: all 0.3s; }
+  background-color: var(--backgroundIndex);
+  transition: all 0.3s;
+  z-index: 0; }
 
 .btn.btn-primary {
-  background: #268a1c;
-  border-color: #268a1c; }
+  background: var(--buttonColor);
+  border-color: var(--buttonColor); }
   .btn.btn-primary:hover, .btn.btn-primary:focus {
-    background: #268a1c !important;
-    border-color: #268a1c !important; }
+    background: var(--buttonColor) !important;
+    border-color: var(--buttonColor) !important; }
 
 .footer p {
   color: rgba(255, 255, 255, 0.5); }
@@ -8349,10 +8363,74 @@ a[data-toggle="collapse"] {
     border-top-right-radius: 0;
 }
 
-#status {
-  margin-top: 10px;
-}
-
 #sideContent {
   display: none;
+}
+
+.input-color {
+  color: red;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.form-switch .form-check-input:checked {
+  background-color: var(--checkboxColor);
+}
+
+.form-switch .form-check-input {
+  height: 2rem;
+  width: 4rem ;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.d-grid{
+  display: flex;
+  justify-content: center;
+  size: 2rem;
+}
+
+.form-check-label {
+  color: black;
+  margin-left: 3rem;
+  font-size: 1.4rem;
+}
+
+#status {
+  margin-top: 45px;
+  text-align: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.list-unstyled span {
+  font-family: "Roboto", sans-serif;
+  margin-left: 15px;
+  font-weight: bold;
+}
+
+#logoSite {
+  height: 275px;
+  width: 275px;
+}
+
+#showPassLabel {
+  color: black;
+  font-size: 0.9rem;
+}
+
+#sidebar img {
+  height: 275px;
+  width: 275px;
+}
+
+.btn-warning {
+  background-color: #6d7094;
 }

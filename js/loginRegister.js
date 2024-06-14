@@ -24,9 +24,6 @@ document.getElementById("botao").addEventListener("click", login);
   document
     .getElementById("flexCheckDefaultCadastro")
     .addEventListener("click", showPassCadastro);
-  document
-    .getElementById("logoutButton")
-    .addEventListener("click", logout);
 
 function registerAccount() {
   let password = document.getElementById("passCadastro").value;
@@ -58,22 +55,10 @@ function login() {
     .then((userCredential) => {
       const user = userCredential.user;
       alert("Login realizado com sucesso");
-      document.getElementById("sideContent").style.display = "block";
       location.replace("pages/light.html");
     })
     .catch((error) => {
       handleLoginError(error);
-    });
-}
-
-function logout() {
-  signOut(auth)
-    .then(() => {
-      alert("Logout realizado com sucesso");
-      location.replace("./");
-    })
-    .catch((error) => {
-      alert("Erro ao realizar logout!");
     });
 }
 
