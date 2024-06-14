@@ -1,67 +1,105 @@
-let status = document.getElementById("status")  
+document.addEventListener("DOMContentLoaded", function () {
+  let status = document.getElementById("status");
 
-document.getElementById("turnOnLightSwitchSala")
-  .addEventListener("change", function () {
-    if (this.checked) {
-      status.innerText = "A luz da sala está acesa";
+  function restoreState(
+    switchElement,
+    stateKey,
+    onMessage,
+    offMessage,
+    onUrl,
+    offUrl
+  ) {
+    let savedState = localStorage.getItem(stateKey);
+    if (savedState === "on") {
+      switchElement.checked = true;
+      status.innerText = onMessage;
       status.style.color = "green";
-      status.style.display = "block";
-      $.ajax({
-        url: "http://192.168.26.168/LS",
-      });
     } else {
-      status.innerText = "A luz da sala está apagada";
+      switchElement.checked = false;
+      status.innerText = offMessage;
       status.style.color = "red";
-      status.style.display = "block";
-      $.ajax({
-        url: "http://192.168.26.168/DS",
-      });
     }
-    setTimeout(function() {
-      status.style.display = "none"; // Define o display como "none" para ocultar o elemento
-  }, 2000);
-  });
+    status.style.display = "block";
+  }
 
-document.getElementById("turnOnLightSwitchCozinha")
-  .addEventListener("change", function () {
-    if (this.checked) {
-      status.innerText = "A luz da cozinha está acesa";
-      status.style.color = "green";
-      status.style.display = "block";
-      $.ajax({
-        url: "http://192.168.26.168/LV",
-      });
-    } else {
-      status.innerText = "A luz da cozinha está apagada";
-      status.style.color = "red";
-      status.style.display = "block";
-      $.ajax({
-        url: "http://192.168.26.168/DV",
-      });
-    }
-    setTimeout(function() {
-      status.style.display = "none"; // Define o display como "none" para ocultar o elemento
-  }, 2000);
-  });
+  function addSwitchListener(
+    switchElement,
+    stateKey,
+    onMessage,
+    offMessage,
+    onUrl,
+    offUrl
+  ) {
+    switchElement.addEventListener("change", function () {
+      if (this.checked) {
+        status.innerText = onMessage;
+        status.style.color = "green";
+        localStorage.setItem(stateKey, "on");
+        $.ajax({ url: onUrl });
+      } else {
+        status.innerText = offMessage;
+        status.style.color = "red";
+        localStorage.setItem(stateKey, "off");
+        $.ajax({ url: offUrl });
+      }
+      setTimeout(function () {
+        status.innerText = "";
+      }, 2000);
+    });
+  }
 
-document.getElementById("turnOnLightSwitchQuarto")
-  .addEventListener("change", function () {
-    if (this.checked) {
-      status.innerText = "A luz do quarto está acesa";
-      status.style.color = "green";
-      status.style.display = "block";
-      $.ajax({
-        url: "http://192.168.26.168/LQ"
-      });
-    } else {
-      status.innerText = "A luz do quarto está apagada";
-      status.style.color = "red";
-      status.style.display = "block";
-      $.ajax({
-        url: "http://192.168.26.168/DQ",
-      });
-    }
-    setTimeout(function() {
-      status.style.display = "none"; // Define o display como "none" para ocultar o elemento
-  }, 2000);
-  });
+  // Luz da Sala
+  let switchSala = document.getElementById("turnOnLightSwitchSala");
+  restoreState(
+    switchSala,
+    "lightSalaState",
+    "A luz da sala está acesa",
+    "A luz da sala está apagada",
+    "http://192.168.26.168/LS",
+    "http://192.168.26.168/DS"
+  );
+  addSwitchListener(
+    switchSala,
+    "lightSalaState",
+    "A luz da sala está acesa",
+    "A luz da sala está apagada",
+    "http://192.168.26.168/LS",
+    "http://192.168.26.168/DS"
+  );
+
+  let switchCozinha = document.getElementById("turnOnLightSwitchCozinha");
+  restoreState(
+    switchCozinha,
+    "lightCozinhaState",
+    "A luz da cozinha está acesa",
+    "A luz da cozinha está apagada",
+    "http://192.168.26.168/LV",
+    "http://192.168.26.168/DV"
+  );
+  addSwitchListener(
+    switchCozinha,
+    "lightCozinhaState",
+    "A luz da cozinha está acesa",
+    "A luz da cozinha está apagada",
+    "http://192.168.26.168/LV",
+    "http://192.168.26.168/DV"
+  );
+
+  let switchQuarto = document.getElementById("turnOnLightSwitchQuarto");
+  restoreState(
+    switchQuarto,
+    "lightQuartoState",
+    "A luz do quarto está acesa",
+    "A luz do quarto está apagada",
+    "http://192.168.26.168/LQ",
+    "http://192.168.26.168/DQ"
+  );
+  addSwitchListener(
+    switchQuarto,
+    "lightQuartoState",
+    "A luz do quarto está acesa",
+    "A luz do quarto está apagada",
+    "http://192.168.26.168/LQ",
+    "http://192.168.26.168/DQ"
+  );
+});

@@ -5,25 +5,35 @@ import {
   signOut,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-document.getElementById("botao").addEventListener("click", login);
-  document
-    .getElementById("registerButton")
-    .addEventListener("click", registerAccount);
+document.addEventListener("DOMContentLoaded", function () {
+  let botao = document.getElementById("botao");
+  let registerButton = document.getElementById("registerButton");
+  let input = document.getElementById("pass");
+  let flexCheckDefault = document.getElementById("flexCheckDefault");
+  let flexCheckDefaultCadastro = document.getElementById("flexCheckDefaultCadastro");
 
-  var input = document.getElementById("pass");
-  input.addEventListener("keypress", function (event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      login();
-    }
-  });
+  if (botao && registerButton && input && flexCheckDefault && flexCheckDefaultCadastro) {
+    botao.addEventListener("click", login);
+    registerButton.addEventListener("click", registerAccount);
 
-  document
-    .getElementById("flexCheckDefault")
-    .addEventListener("click", showPass);
-  document
-    .getElementById("flexCheckDefaultCadastro")
-    .addEventListener("click", showPassCadastro);
+    input.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        login();
+      }
+    });
+
+    flexCheckDefault.addEventListener("click", showPass);
+    flexCheckDefaultCadastro.addEventListener("click", showPassCadastro);
+  }
+
+  // Verifica se o usuário está autenticado e redireciona se estiver na página light.html
+  const user = auth.currentUser;
+  if (user && window.location.pathname.includes("light.html")) {
+    localStorage.setItem('authenticated', true);
+    location.replace("../pages/light.html");
+  }
+});
 
 function registerAccount() {
   let password = document.getElementById("passCadastro").value;
@@ -55,7 +65,9 @@ function login() {
     .then((userCredential) => {
       const user = userCredential.user;
       alert("Login realizado com sucesso");
-      location.replace("pages/light.html");
+      if (!window.location.pathname.includes("light.html")) {
+        location.replace("../pages/light.html");
+      }
     })
     .catch((error) => {
       handleLoginError(error);
@@ -120,10 +132,3 @@ function showPassCadastro() {
     pass2.type = "password";
   }
 }
-
-document
-    .getElementById("flexCheckDefault")
-    .addEventListener("click", showPass);
-  document
-    .getElementById("flexCheckDefaultCadastro")
-    .addEventListener("click", showPassCadastro);
