@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const user = auth.currentUser;
   if (user && window.location.pathname.includes("light.html")) {
     localStorage.setItem('authenticated', true);
-    location.replace("../pages/light.html");
+    location.replace("/pages/light.html");
   }
 });
 
@@ -43,15 +43,12 @@ function registerAccount() {
   if (password === passwordConfirm) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
         alert("Conta cadastrada com sucesso");
         $.ajax({
           url: "http://192.168.26.168/S",
         });
       })
-      .catch((error) => {
-        handleRegisterError(error);
-      });
+      .catch(handleRegisterError);
   } else {
     alert("As senhas não coincidem. Por favor, tente novamente.");
   }
@@ -63,15 +60,12 @@ function login() {
 
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const user = userCredential.user;
       alert("Login realizado com sucesso");
       if (!window.location.pathname.includes("light.html")) {
-        location.replace("../pages/light.html");
+        location.replace("/pages/light.html");
       }
     })
-    .catch((error) => {
-      handleLoginError(error);
-    });
+    .catch(handleLoginError);
 }
 
 function handleRegisterError(error) {
@@ -80,9 +74,7 @@ function handleRegisterError(error) {
       alert("O e-mail já está em uso. Por favor, use outro e-mail.");
       break;
     case "auth/invalid-email":
-      alert(
-        "O e-mail fornecido é inválido. Por favor, verifique e tente novamente."
-      );
+      alert("O e-mail fornecido é inválido. Por favor, verifique e tente novamente.");
       break;
     case "auth/weak-password":
       alert("A senha é muito fraca. Por favor, use uma senha mais forte.");
@@ -95,17 +87,13 @@ function handleRegisterError(error) {
 function handleLoginError(error) {
   switch (error.code) {
     case "auth/user-not-found":
-      alert(
-        "Usuário não encontrado. Por favor, verifique o e-mail e tente novamente."
-      );
+      alert("Usuário não encontrado. Por favor, verifique o e-mail e tente novamente.");
       break;
     case "auth/wrong-password":
       alert("Senha incorreta. Por favor, tente novamente.");
       break;
     case "auth/invalid-email":
-      alert(
-        "O e-mail fornecido é inválido. Por favor, verifique e tente novamente."
-      );
+      alert("O e-mail fornecido é inválido. Por favor, verifique e tente novamente.");
       break;
     default:
       alert("Erro ao fazer login! Código de erro: " + error.code);
@@ -114,11 +102,7 @@ function handleLoginError(error) {
 
 function showPass() {
   let pass = document.getElementById("pass");
-  if (pass.type === "password") {
-    pass.type = "text";
-  } else {
-    pass.type = "password";
-  }
+  pass.type = (pass.type === "password") ? "text" : "password";
 }
 
 function showPassCadastro() {
@@ -132,3 +116,4 @@ function showPassCadastro() {
     pass2.type = "password";
   }
 }
+
