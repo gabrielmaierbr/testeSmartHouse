@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const user = auth.currentUser;
   if (user && window.location.pathname.includes("light.html")) {
     localStorage.setItem('authenticated', true);
-    location.replace("/pages/light.html");
+    location.replace("./pages/light.html");
   }
 });
 
@@ -62,7 +62,7 @@ function login() {
     .then((userCredential) => {
       alert("Login realizado com sucesso");
       if (!window.location.pathname.includes("light.html")) {
-        location.replace("/pages/light.html");
+        location.replace("./pages/light.html");
       }
     })
     .catch(handleLoginError);
